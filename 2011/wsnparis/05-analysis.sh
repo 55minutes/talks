@@ -25,37 +25,37 @@ curl -XDELETE localhost:9200/*
 # <https://github.com/elasticsearch/elasticsearch-analysis-phonetic>. Follow
 # the instructions there.
 curl -XPUT localhost:9200/test -d '{
-    "settings" : {
-        "index" : {
-            "analysis" : {
-                "analyzer" : {
-                    "key_lowercase" : {
-                        "tokenizer" : "keyword",
-                        "filter" : "lowercase"
-                    },
-                    "ngram" : {
-                        "tokenizer" : "standard",
-                        "filter" : ["standard", "lowercase", "stop", "ngram"]
-                    },
-                    "soundex" : {
-                        "tokenizer" : "whitespace",
-                        "filter" : ["soundex"]
-                    }
-                },
-                "filter" : {
-                    "soundex" : {
-                        "type" : "phonetic",
-                        "encoder" : "soundex"
-                    },
-                    "ngram" : {
-                        "type" : "ngram",
-                        "min_gram" : 2,
-                        "max_gram" : 4
-                    }
-                }
-            }
+  "settings" : {
+    "index" : {
+      "analysis" : {
+        "analyzer" : {
+          "key_lowercase" : {
+            "tokenizer" : "keyword",
+            "filter" : "lowercase"
+          },
+          "ngram" : {
+            "tokenizer" : "standard",
+            "filter" : ["standard", "lowercase", "stop", "ngram"]
+          },
+          "soundex" : {
+            "tokenizer" : "whitespace",
+            "filter" : ["soundex"]
+          }
+        },
+        "filter" : {
+          "soundex" : {
+            "type" : "phonetic",
+            "encoder" : "soundex"
+          },
+          "ngram" : {
+            "type" : "ngram",
+            "min_gram" : 2,
+            "max_gram" : 4
+          }
         }
+      }
     }
+  }
 }'
 
 # use the key_lowercase analyzer
