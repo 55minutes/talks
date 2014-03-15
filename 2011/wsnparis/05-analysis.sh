@@ -19,9 +19,11 @@ curl -XPOST 'localhost:9200/test/_analyze?analyzer=stop&pretty=1' -d 'The quick 
 #   tokenizer -> keyword
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
-
 curl -XDELETE localhost:9200/*
 # custom analysis
+# you have to install the phonetic analysis plugin first from
+# <https://github.com/elasticsearch/elasticsearch-analysis-phonetic>. Follow
+# the instructions there.
 curl -XPUT localhost:9200/test -d '{
     "settings" : {
         "index" : {
