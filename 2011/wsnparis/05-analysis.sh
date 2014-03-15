@@ -103,7 +103,7 @@ curl -XPUT localhost:9200/test/type1/_mapping -d '{
 
 # Index sample data (just with text3)
 curl -XPUT localhost:9200/test/type1/1 -d '{
-    "text3" : "The quick brown fox jumped over the lazy dog"
+  "text3" : "The quick brown fox jumped over the lazy dog"
 }'
 
 # search for quik (note that its not quick) using differen text3 fields
