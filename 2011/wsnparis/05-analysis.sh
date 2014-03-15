@@ -16,7 +16,7 @@ curl -XPOST 'localhost:9200/test/_analyze?analyzer=simple&pretty=1' -d 'The quic
 #    filter -> [standard, lowercase, stop]
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=standard&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # keyword analyzer:
-#	 tokenizer -> keyword
+#   tokenizer -> keyword
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
 
