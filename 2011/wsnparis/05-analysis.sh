@@ -69,36 +69,33 @@ curl -XPOST 'localhost:9200/test/_analyze?analyzer=soundex&pretty=1' -d 'The qui
 # Use analyzers in mappings
 # -> Note the text3 multi_field option
 curl -XPUT localhost:9200/test/type1/_mapping -d '{
-    "type1" : {
-        "properties" : {
-            "text1" : {
-                "type" : "string",
-                "analyzer" : "simple"
-            },
-            "text2" : {
-                "type" : "string",
-                "index_analyzer" : "simple",
-                "search_analyzer" : "standard"
-            },
-            "text3" : {
-                "type" : "multi_field",
-                "fields" : {
-                    "text3" : {
-                        "type" : "string",
-                        "analyzer" : "standard"
-                    },
-                    "ngram" : {
-                        "type" : "string",
-                        "analyzer" : "ngram"
-                    },
-                    "soundex" : {
-                        "type" : "string",
-                        "analyzer" : "soundex"
-                    }
-                }
-            }
+  "type1" : {
+    "properties" : {
+      "text1" : {
+        "type" : "string",
+        "analyzer" : "simple"
+      },
+      "text2" : {
+        "type" : "string",
+        "index_analyzer" : "simple",
+        "search_analyzer" : "standard"
+      },
+      "text3" : {
+        "type" : "string",
+        "analyzer" : "standard",
+        "fields" : {
+          "ngram" : {
+            "type" : "string",
+            "analyzer" : "ngram"
+          },
+          "soundex" : {
+            "type" : "string",
+            "analyzer" : "soundex"
+          }
         }
+      }
     }
+  }
 }'
 
 # Index sample data (just with text3)
