@@ -1,5 +1,5 @@
 # delete all data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # index a sample doc and see its derived mapping for *type1*
 curl -XPUT localhost:9200/test/type1/1?pretty=1 -d '{

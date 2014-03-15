@@ -1,7 +1,7 @@
 # start with one server
 
 # delete all data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # create an index with two shards and 1 replica
 curl -XPUT localhost:9200/index1 -d '{

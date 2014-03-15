@@ -1,5 +1,5 @@
 # delete all data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # create an index so we can play with it
 curl -XPUT localhost:9200/test
@@ -20,7 +20,7 @@ curl -XPOST 'localhost:9200/test/_analyze?analyzer=standard&pretty=1' -d 'The qu
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
 
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 # custom analysis
 curl -XPUT localhost:9200/test -d '{
     "settings" : {

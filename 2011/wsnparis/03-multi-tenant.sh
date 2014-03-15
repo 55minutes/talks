@@ -1,5 +1,5 @@
 # delete all data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # create *index1* with 2 shards and 1 replica
 curl -XPUT localhost:9200/index1 -d '{

@@ -1,5 +1,5 @@
 # delete all the data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # create an index to start to work against
 curl -XPUT localhost:9200/test

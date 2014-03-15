@@ -1,5 +1,5 @@
 # Delete all the data
-curl -XDELETE localhost:9200/
+curl -XDELETE localhost:9200/*
 
 # Index Some Data
 curl -XPOST localhost:9200/wsnparis/talk?pretty=1 -d '{
