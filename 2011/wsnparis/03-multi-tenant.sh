@@ -14,7 +14,7 @@ curl -XPOST localhost:9200/index1/type1/1 -d '{
   "message" : "I am a message that exists on index1"
 }'
 
-# create *index2* with 1 shard and 2 replicas
+# create *index2* with 1 shard and 1 replica
 curl -XPUT localhost:9200/index2 -d '{
     "index" : {
         "number_of_shards" : 1,
