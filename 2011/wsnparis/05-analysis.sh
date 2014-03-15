@@ -11,10 +11,10 @@ curl -XPOST 'localhost:9200/test/_analyze?analyzer=whitespace&pretty=1' -d 'The 
 # simple analyzer
 #    tokenizer -> lowercase (divides text at non-letters and lowercase them)
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=simple&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
-# standard analyzer: (the default)
-#    tokenizer -> standard
-#    filter -> [standard, lowercase, stop]
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=standard&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+# stop analyzer:
+#    tokenizer -> lowercase
+#    filter -> [lowercase, stop]
+curl -XPOST 'localhost:9200/test/_analyze?analyzer=stop&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # keyword analyzer:
 #   tokenizer -> keyword
 curl -XPOST 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
