@@ -5,10 +5,10 @@ curl -XDELETE localhost:9200/*
 
 # create an index with two shards and 1 replica
 curl -XPUT localhost:9200/index1 -d '{
-    "index" : {
-        "number_of_shards" : 2,
-        "number_of_replicas" : 1
-    }
+  "index" : {
+    "number_of_shards" : 2,
+    "number_of_replicas" : 1
+  }
 }'
 
 # one server, 2 shard instances are allocated
