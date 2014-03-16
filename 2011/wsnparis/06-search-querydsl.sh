@@ -27,53 +27,53 @@ curl -XPUT localhost:9200/test/type1/3 -d '{
 curl 'localhost:9200/test/_search?q=tags:scala&pretty=1'
 # Same as:
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "query_string" : {
-            "query" : "tags:scala"
-        }
+  "query" : {
+    "query_string" : {
+      "query" : "tags:scala"
     }
+  }
 }'
 
 # Basic (non analyzed queries)
 # -> term (non analyzed single term)
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "term" : {
-            "tags" : "scala"
-        }
+  "query" : {
+    "term" : {
+      "tags" : "scala"
     }
+  }
 }'
 # -> term, this won't match, since its not analyzed
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "term" : {
-            "tags" : "Scala"
-        }
+  "query" : {
+    "term" : {
+      "tags" : "Scala"
     }
+  }
 }'
 # -> prefix (non analyzed single term)
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "prefix" : {
-            "tags" : "sca"
-        }
+  "query" : {
+    "prefix" : {
+      "tags" : "sca"
     }
+  }
 }'
 # -> wildcard (non analyzed single term)
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "wildcard" : {
-            "tags" : "sca*a"
-        }
+  "query" : {
+    "wildcard" : {
+      "tags" : "sca*a"
     }
+  }
 }'
 # -> fuzzy (non analyzed single term)
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "fuzzy" : {
-            "tags" : "scalra"
-        }
+  "query" : {
+    "fuzzy" : {
+      "tags" : "scalra"
     }
+  }
 }'
 
 # Text Queries (Analyzed)
@@ -90,19 +90,19 @@ curl 'localhost:9200/test/_search?pretty=1' -d '{
 # Range
 # -> range on numeric values
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "range" : {
-            "price" : { "gt" : 15 }
-        }
+  "query" : {
+    "range" : {
+      "price" : { "gt" : 15 }
     }
+  }
 }'
 # -> and on dates
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "range" : {
-            "date" : { "gte" : "2011-05-26" }
-        }
+  "query" : {
+    "range" : {
+      "date" : { "gte" : "2011-05-26" }
     }
+  }
 }'
 
 # Bool Query
