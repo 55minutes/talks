@@ -76,16 +76,16 @@ curl 'localhost:9200/test/_search?pretty=1' -d '{
   }
 }'
 
-# Text Queries (Analyzed)
+# Match Queries (Analyzed)
 # -> text (analyzed and expanded to bool query)
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "text" : {
-            "tags" : "clojure java"
-        }
+  "query" : {
+    "match" : {
+      "tags" : "clojure java"
     }
+  }
 }'
-# also includes text_phrase and text_phrase_prefix
+# also includes match_phrase and match_phrase_prefix
 
 # Range
 # -> range on numeric values
@@ -108,20 +108,20 @@ curl 'localhost:9200/test/_search?pretty=1' -d '{
 # Bool Query
 # -> sample with must, also has must_not and should clauses
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "bool" : {
-            "must" : [
-                { "text" : {
-                        "tags" : "scala"
-                    }
-                }, {
-                    "range" : {
-                        "price" : { "gt" : 15 }
-                    }
-                }
-            ]
+  "query" : {
+    "bool" : {
+      "must" : [
+        { "match" : {
+            "tags" : "scala"
+          }
+        }, {
+          "range" : {
+            "price" : { "gt" : 12 }
+          }
         }
+      ]
     }
+  }
 }'
 
 # Filtered Query
@@ -129,19 +129,18 @@ curl 'localhost:9200/test/_search?pretty=1' -d '{
 #     and are easily cached. 
 #     There are many filter types as well, including range and term
 curl 'localhost:9200/test/_search?pretty=1' -d '{
-    "query" : {
-        "filtered" : {
-            "query" : {
-                "text" : {
-                    "tags" : "scala"
-                }
-            },
-            "filter" : {
-                "range" : {
-                    "price" : { "gt" : 15 }
-                }
-            }
+  "query" : {
+    "filtered" : {
+      "query" : {
+        "match" : {
+          "tags" : "scala"
         }
+      },
+      "filter" : {
+        "range" : {
+          "price" : { "gt" : 12 }
+        }
+      }
     }
+  }
 }'
-
