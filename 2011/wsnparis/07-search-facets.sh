@@ -61,140 +61,140 @@ curl -XPOST localhost:9200/test/type1 -d '{
 
 # Terms Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "tags_f" : {
-            "terms" : {
-                "field" : "tags"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "tags_f" : {
+      "terms" : {
+        "field" : "tags"
+      }
     }
+  }
 }'
 
 # Statistical Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "stats_f" : {
-            "statistical" : {
-                "field" : "price"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "stats_f" : {
+      "statistical" : {
+        "field" : "price"
+      }
     }
+  }
 }'
 
 # Terms Stats Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "stats_f" : {
-            "terms_stats" : {
-                "key_field" : "tags",
-                "value_field" : "price"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "stats_f" : {
+      "terms_stats" : {
+        "key_field" : "tags",
+        "value_field" : "price"
+      }
     }
+  }
 }'
 
 # Range Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "range_f" : {
-            "range" : {
-                "field" : "count",
-                "ranges" : [
-                    {"to" : 10},
-                    {"from" : 5, "to" : 25},
-                    {"from" : 3, "to" : 15}
-                ]
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "range_f" : {
+      "range" : {
+        "field" : "count",
+        "ranges" : [
+          {"to" : 10},
+          {"from" : 10, "to" : 20},
+          {"from" : 20}
+        ]
+      }
     }
+  }
 }'
 
 # Range Facet with custom value field
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "range_f" : {
-            "range" : {
-                "field" : "count",
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "range_f" : {
+      "range" : {
+        "key_field" : "count",
         "value_field" : "price",
-                "ranges" : [
-                    {"to" : 10},
-                    {"from" : 5, "to" : 25},
-                    {"from" : 3, "to" : 15}
-                ]
-            }
-        }
+        "ranges" : [
+          {"to" : 10},
+          {"from" : 10, "to" : 20},
+          {"from" : 20}
+        ]
+      }
     }
+  }
 }'
 
 # Histogram Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "histo_f" : {
-            "histogram" : {
-                "field" : "count",
-                "interval" : 5
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "histo_f" : {
+      "histogram" : {
+        "field" : "count",
+        "interval" : 5
+      }
     }
+  }
 }'
 
 # Histogram with Stats Facet
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "histo_f" : {
-            "histogram" : {
-                "field" : "count",
-                "value_field" : "price",
-                "interval" : 5
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "histo_f" : {
+      "histogram" : {
+        "field" : "count",
+        "value_field" : "price",
+        "interval" : 5
+      }
     }
+  }
 }'
 
 # Date Histogram
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "histo_f" : {
-            "date_histogram" : {
-                "field" : "date",
-                "interval" : "day"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "histo_f" : {
+      "date_histogram" : {
+        "field" : "date",
+        "interval" : "day"
+      }
     }
+  }
 }'
 
 # Date Histogram with Time Zone
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "histo_f" : {
-            "date_histogram" : {
-                "field" : "date",
-                "time_zone" : "Europe/Paris",
-                "interval" : "day"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "histo_f" : {
+      "date_histogram" : {
+        "field" : "date",
+        "time_zone" : "US/Eastern",
+        "interval" : "day"
+      }
     }
+  }
 }'
 
 # Date Histogram with Stats
 curl 'localhost:9200/test/_search?search_type=count&pretty=1' -d '{
-    "query" : { "match_all" : {}},
-    "facets" : {
-        "histo_f" : {
-            "date_histogram" : {
-                "field" : "date",
-                "value_field" : "price",
-                "interval" : "day"
-            }
-        }
+  "query" : { "match_all" : {}},
+  "facets" : {
+    "histo_f" : {
+      "date_histogram" : {
+        "field" : "date",
+        "value_field" : "price",
+        "interval" : "day"
+      }
     }
+  }
 }'
