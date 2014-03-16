@@ -38,4 +38,3 @@ curl 'localhost:9200/index1,index2/_search?q=message&pretty=1'
 
 # search on "_all" indices
 curl 'localhost:9200/_search?q=message&pretty=1'
-
