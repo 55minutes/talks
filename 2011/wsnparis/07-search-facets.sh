@@ -19,7 +19,7 @@ curl -XPOST localhost:9200/test/type1 -d '{
 curl -XPOST localhost:9200/test/type1 -d '{
   "tags" : ["clojure", "lisp"],
   "count" : 7,
-  "price" : 5.5,
+  "price" : 25.5,
   "date" : "2011-05-26T03:23"
 }'
 
@@ -40,7 +40,7 @@ curl -XPOST localhost:9200/test/type1 -d '{
 curl -XPOST localhost:9200/test/type1 -d '{
   "tags" : ["perl", "ruby"],
   "count" : 14,
-  "price" : 12.3,
+  "price" : 9.5,
   "date" : "2011-05-29T03:24"
 }'
 
