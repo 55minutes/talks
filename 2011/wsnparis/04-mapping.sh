@@ -19,21 +19,21 @@ curl -XDELETE localhost:9200/test
 # with "_all" disabled
 curl -XPUT localhost:9200/test?pretty-1 -d '{
   "mappings" : {
-      "type1" : {
-          "_all" : {"enabled" : false},
-          "properties" : {
-              "count" : {
-                  "type" : "integer"
-              },
-              "price" : {
-                  "type" : "float"
-              },
-              "date" : {
-                  "type" : "date",
-                  "format" : "dd MMM YYYY"
-              }
-          }
+    "type1" : {
+      "_all" : {"enabled" : false},
+      "properties" : {
+        "count" : {
+          "type" : "integer"
+        },
+        "price" : {
+          "type" : "float"
+        },
+        "date" : {
+          "type" : "date",
+          "format" : "dd MMM YYYY"
+        }
       }
+    }
   }
 }'
 
