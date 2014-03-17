@@ -1,3 +1,8 @@
+# If you've installed elasticsearch via Homebrew, make sure to comment out the
+# following line from your
+# /usr/local/Cellar/elasticsearch/1.0.1/config/elasticsearch.yml
+# # network.host: 127.0.0.1
+
 # start with one server
 
 # delete all data
@@ -81,12 +86,21 @@ curl -XPOST localhost:9200/index1/talk -d '{
 }'
 
 # start another server, and see the rest of the shards allocated
+# this server will be at port 9201
 curl -XGET localhost:9200/_cluster/state?pretty=1
+
+# check the health of the cluster, should be green
+curl -XGET localhost:9200/_cluster/health?pretty=1
 
 # start another server, and see shards rebalance
+# this server will be at port 9202
 curl -XGET localhost:9200/_cluster/state?pretty=1
 
-#kill the first node and see a new master being elected, and new primary shards
+# check the health of the cluster, should be green
+curl -XGET localhost:9200/_cluster/health?pretty=1
+
+# kill the first node and see a new master being elected, and new primary
+# shards
 curl -XGET localhost:9201/_cluster/state?pretty=1
 
 #start the first node back up, and see again shards rebalance
@@ -99,3 +113,11 @@ curl -XPUT localhost:9200/index1/_settings -d '{
   }
 }'
 curl -XGET localhost:9200/_cluster/state?pretty=1
+
+# kill the server at port 9202, and see the shards and replicas rebalance
+# notice one of the replicas for each shard becomes "UNASSIGNED"
+curl -XGET localhost:9200/_cluster/state?pretty=1
+
+# notice our health is now yellow because we don't have enough nodes to handle
+# 2 replications
+curl -XGET localhost:9200/_cluster/health?pretty=1
