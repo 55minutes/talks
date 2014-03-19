@@ -1,7 +1,7 @@
 # Delete all the data
 curl -XDELETE localhost:9200/*
 
-# Index Some Data
+# Index Some Data, one by one
 curl -XPOST localhost:9200/wsnparis/talk?pretty=1 -d '{
   "speaker" : "Adrian Colyer",
   "title" : "Enterprise Applications in 2011 Challenges in Development and Deployment, and Springs response"
@@ -17,55 +17,29 @@ curl -XPOST localhost:9200/wsnparis/talk -d '{
   "title" : "Towards the Essence of Programming"
 }'
 
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Jevgeni Kabanov",
-  "title" : "Do you really get memory?"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Jags Ramnarayan",
-  "title" : "SQLFabric - Scalable SQL instead of NoSQL"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Brad Drysdale",
-  "title" : "HTML5 WebSockets : the Web Communication revolution, making the impossible possible"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Neal Gafter",
-  "title" : ""
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Rob Harrop",
-  "title" : "Multi-Platform Messaging with RabbitMQ"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Theo Schlossnagle",
-  "title" : "Service Decoupling in Carrier-Class Architectures"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Michaël Chaize",
-  "title" : "Architecting user-experiences"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Jonas Bonér",
-  "title" : "Akka: Simpler Scalability, Fault-Tolerance, Concurrency & Remoting through Actors"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Shay Banon",
-  "title" : "ElasticSearch - A Distributed Search Engine"
-}'
-
-curl -XPOST localhost:9200/wsnparis/talk -d '{
-  "speaker" : "Kohsuke Kawaguchi",
-  "title" : "Taking Continuous Integration to the next level with Jenkins"
-}'
+# Bulk index
+curl -XPOST localhost:9200/wsnparis/talk/_bulk --data-binary '
+  { "index" : {} }
+  { "speaker" : "Jevgeni Kabanov", "title" : "Do you really get memory?" }
+  { "index" : {} }
+  { "speaker" : "Jags Ramnarayan", "title" : "SQLFabric - Scalable SQL instead of NoSQL" }
+  { "index" : {} }
+  { "speaker" : "Brad Drysdale", "title" : "HTML5 WebSockets : the Web Communication revolution, making the impossible possible" }
+  { "index" : {} }
+  { "speaker" : "Neal Gafter", "title" : "" }
+  { "index" : {} }
+  { "speaker" : "Rob Harrop", "title" : "Multi-Platform Messaging with RabbitMQ" }
+  { "index" : {} }
+  { "speaker" : "Theo Schlossnagle", "title" : "Service Decoupling in Carrier-Class Architectures" }
+  { "index" : {} }
+  {  "speaker" : "Michaël Chaize", "title" : "Architecting user-experiences" }
+  { "index" : {} }
+  { "speaker" : "Jonas Bonér", "title" : "Akka: Simpler Scalability, Fault-Tolerance, Concurrency & Remoting through Actors" }
+  { "index" : {} }
+  { "speaker" : "Shay Banon", "title" : "ElasticSearch - A Distributed Search Engine" }
+  { "index" : {} }
+  { "speaker" : "Kohsuke Kawaguchi", "title" : "Taking Continuous Integration to the next level with Jenkins" }
+'
 
 # Simple Search
 curl 'localhost:9200/_count?q=*&pretty=1'
@@ -75,3 +49,26 @@ curl 'localhost:9200/_search?q=scalability&pretty=1'
 curl 'localhost:9200/_search?q=speaker:Adrian&pretty=1'
 
 curl 'localhost:9200/_search?q=_missing_:title&pretty=1'
+
+# What's the difference between index and create?
+curl -XPOST localhost:9200/wsnparis/talk/ben -d '{
+  "speaker" : "Benjamin Pack",
+  "title" : "Towards a Harmonious Workplace"
+}'
+curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
+
+## Now let's change it
+curl -XPOST localhost:9200/wsnparis/talk/ben -d '{
+  "speaker" : "Benjamin Pack",
+  "title" : "Towards a Caring Workplace"
+}'
+# Notice the version number has been incremented
+curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
+
+# Now let's try to use create, errors out
+curl -XPOST localhost:9200/wsnparis/talk/ben/_create -d '{
+  "speaker" : "Benjamin Pack",
+  "title" : "Towards a Sarcastic Workplace"
+}'
+# No changes
+curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
