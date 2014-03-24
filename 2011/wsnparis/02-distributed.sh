@@ -114,6 +114,14 @@ curl -XPUT localhost:9200/index1/_settings -d '{
 }'
 curl localhost:9200/_cluster/state?pretty=1
 
+# increase the number of shards, error out.
+# You *can't* change the number of shards after the fact!
+curl -XPUT localhost:9200/index1/_settings -d '{
+  "index" : {
+      "number_of_shards" : 3
+  }
+}'
+
 # kill the server at port 9202, and see the shards and replicas rebalance
 # notice one of the replicas for each shard becomes "UNASSIGNED"
 curl localhost:9200/_cluster/state?pretty=1
