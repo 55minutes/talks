@@ -38,5 +38,6 @@ curl localhost:9200/test/type1/_bulk --data-binary '
 { "update" : {"_id" : "3"} }
 { "doc" : {"date" : "2011-06-01", "price" : 13.75} }
 '
-curl -XGET localhost:9200/test/type1/2?pretty=1
-curl -XGET localhost:9200/test/type1/3?pretty=1
+curl localhost:9200/test/type1/_mget?pretty=1 -d '{
+  "ids" : ["2", "3"]
+}'
