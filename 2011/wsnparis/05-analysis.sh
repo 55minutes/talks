@@ -7,17 +7,17 @@ curl -XPUT localhost:9200/test
 # whitespace analysis of sample text
 # whitespace analyzer
 #    tokenizer -> whitespace
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=whitespace&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=whitespace&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # simple analyzer
 #    tokenizer -> lowercase (divides text at non-letters and lowercase them)
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=simple&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=simple&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # stop analyzer:
 #    tokenizer -> lowercase
 #    filter -> [lowercase, stop]
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=stop&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=stop&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # keyword analyzer:
 #   tokenizer -> keyword
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
 curl -XDELETE localhost:9200/*
 # custom analysis
@@ -59,11 +59,11 @@ curl -XPUT localhost:9200/test -d '{
 }'
 
 # use the key_lowercase analyzer
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=key_lowercase&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=key_lowercase&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # use the ngram analyzer
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=ngram&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=ngram&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # use the soundex analyzer
-curl -XPOST 'localhost:9200/test/_analyze?analyzer=soundex&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
+curl 'localhost:9200/test/_analyze?analyzer=soundex&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
 
 # Use analyzers in mappings

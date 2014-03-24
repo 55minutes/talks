@@ -24,15 +24,15 @@ curl -XPUT localhost:9200/test/type1/3 -d '{
 }'
 
 # Update one record
-curl -XPOST localhost:9200/test/type1/1/_update -d '{
+curl localhost:9200/test/type1/1/_update -d '{
   "doc" : {
     "price" : 11
   }
 }'
-curl -XGET localhost:9200/test/type1/1?pretty=1
+curl localhost:9200/test/type1/1?pretty=1
 
 # Bulk update
-curl -XPOST localhost:9200/test/type1/_bulk --data-binary '
+curl localhost:9200/test/type1/_bulk --data-binary '
 { "update" : {"_id" : "2"} }
 { "doc" : {"count" : 8} }
 { "update" : {"_id" : "3"} }

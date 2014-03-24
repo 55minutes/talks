@@ -2,23 +2,23 @@
 curl -XDELETE localhost:9200/*
 
 # Index Some Data, one by one
-curl -XPOST localhost:9200/wsnparis/talk?pretty=1 -d '{
+curl localhost:9200/wsnparis/talk?pretty=1 -d '{
   "speaker" : "Adrian Colyer",
   "title" : "Enterprise Applications in 2011 Challenges in Development and Deployment, and Springs response"
 }'
 
-curl -XPOST localhost:9200/wsnparis/talk -d '{
+curl localhost:9200/wsnparis/talk -d '{
   "speaker" : "Boris Bokowski",
   "title" : "Introducing Orion: Embracing the Web for Software Development Tooling"
 }'
 
-curl -XPOST localhost:9200/wsnparis/talk -d '{
+curl localhost:9200/wsnparis/talk -d '{
   "speaker" : "Howard Lewis Ship",
   "title" : "Towards the Essence of Programming"
 }'
 
 # Bulk index
-curl -XPOST localhost:9200/wsnparis/talk/_bulk --data-binary '
+curl localhost:9200/wsnparis/talk/_bulk --data-binary '
   { "index" : {} }
   { "speaker" : "Jevgeni Kabanov", "title" : "Do you really get memory?" }
   { "index" : {} }
@@ -51,24 +51,24 @@ curl 'localhost:9200/_search?q=speaker:Adrian&pretty=1'
 curl 'localhost:9200/_search?q=_missing_:title&pretty=1'
 
 # What's the difference between index and create?
-curl -XPOST localhost:9200/wsnparis/talk/ben -d '{
+curl localhost:9200/wsnparis/talk/ben -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Harmonious Workplace"
 }'
-curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
+curl localhost:9200/wsnparis/talk/ben?pretty=1
 
 ## Now let's change it
-curl -XPOST localhost:9200/wsnparis/talk/ben -d '{
+curl localhost:9200/wsnparis/talk/ben -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Caring Workplace"
 }'
 # Notice the version number has been incremented
-curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
+curl localhost:9200/wsnparis/talk/ben?pretty=1
 
 # Now let's try to use create, errors out
-curl -XPOST localhost:9200/wsnparis/talk/ben/_create -d '{
+curl localhost:9200/wsnparis/talk/ben/_create -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Sarcastic Workplace"
 }'
 # No changes
-curl -XGET localhost:9200/wsnparis/talk/ben?pretty=1
+curl localhost:9200/wsnparis/talk/ben?pretty=1

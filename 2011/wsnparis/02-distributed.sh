@@ -17,107 +17,107 @@ curl -XPUT localhost:9200/index1 -d '{
 }'
 
 # one server, 2 shard instances are allocated
-curl -XGET localhost:9200/_cluster/state?pretty=1
+curl localhost:9200/_cluster/state?pretty=1
 
 # index some data if you want...
-curl -XPOST localhost:9200/index1/talk?pretty=1 -d '{
+curl localhost:9200/index1/talk?pretty=1 -d '{
   "speaker" : "Adrian Colyer",
   "title" : "Enterprise Applications in 2011 Challenges in Development and Deployment, and Springs response"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Boris Bokowski",
   "title" : "Introducing Orion: Embracing the Web for Software Development Tooling"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Howard Lewis Ship",
   "title" : "Towards the Essence of Programming"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Jevgeni Kabanov",
   "title" : "Do you really get memory?"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Jags Ramnarayan",
   "title" : "SQLFabric - Scalable SQL instead of NoSQL"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Brad Drysdale",
   "title" : "HTML5 WebSockets : the Web Communication revolution, making the impossible possible"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Neal Gafter",
   "title" : ""
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Rob Harrop",
   "title" : "Multi-Platform Messaging with RabbitMQ"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Theo Schlossnagle",
   "title" : "Service Decoupling in Carrier-Class Architectures"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Michaël Chaize",
   "title" : "Architecting user-experiences"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Jonas Bonér",
   "title" : "Akka: Simpler Scalability, Fault-Tolerance, Concurrency & Remoting through Actors"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Shay Banon",
   "title" : "ElasticSearch - A Distributed Search Engine"
 }'
 
-curl -XPOST localhost:9200/index1/talk -d '{
+curl localhost:9200/index1/talk -d '{
   "speaker" : "Kohsuke Kawaguchi",
   "title" : "Taking Continuous Integration to the next level with Jenkins"
 }'
 
 # start another server, and see the rest of the shards allocated
 # this server will be at port 9201
-curl -XGET localhost:9200/_cluster/state?pretty=1
+curl localhost:9200/_cluster/state?pretty=1
 
 # check the health of the cluster, should be green
-curl -XGET localhost:9200/_cluster/health?pretty=1
+curl localhost:9200/_cluster/health?pretty=1
 
 # start another server, and see shards rebalance
 # this server will be at port 9202
-curl -XGET localhost:9200/_cluster/state?pretty=1
+curl localhost:9200/_cluster/state?pretty=1
 
 # check the health of the cluster, should be green
-curl -XGET localhost:9200/_cluster/health?pretty=1
+curl localhost:9200/_cluster/health?pretty=1
 
 # kill the first node and see a new master being elected, and new primary
 # shards
-curl -XGET localhost:9201/_cluster/state?pretty=1
+curl localhost:9201/_cluster/state?pretty=1
 
-#start the first node back up, and see again shards rebalance
-curl -XGET localhost:9200/_cluster/state?pretty=1
+# start the first node back up, and see again shards rebalance
+curl localhost:9200/_cluster/state?pretty=1
 
-#increase the number of replicas
+# increase the number of replicas
 curl -XPUT localhost:9200/index1/_settings -d '{
   "index" : {
       "number_of_replicas" : 2
   }
 }'
-curl -XGET localhost:9200/_cluster/state?pretty=1
+curl localhost:9200/_cluster/state?pretty=1
 
 # kill the server at port 9202, and see the shards and replicas rebalance
 # notice one of the replicas for each shard becomes "UNASSIGNED"
-curl -XGET localhost:9200/_cluster/state?pretty=1
+curl localhost:9200/_cluster/state?pretty=1
 
 # notice our health is now yellow because we don't have enough nodes to handle
 # 2 replications
-curl -XGET localhost:9200/_cluster/health?pretty=1
+curl localhost:9200/_cluster/health?pretty=1

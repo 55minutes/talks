@@ -2,56 +2,56 @@
 curl -XDELETE localhost:9200/*
 
 # index some data
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["scala", "java"],
   "count" : 10,
   "price" : 12.5,
   "date" : "2011-05-25T01:52"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["clojure", "java"],
   "count" : 14,
   "price" : 17.5,
   "date" : "2011-05-25T07:52"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["clojure", "lisp"],
   "count" : 7,
   "price" : 25.5,
   "date" : "2011-05-26T03:23"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["ruby", "java"],
   "count" : 7,
   "price" : 5.5,
   "date" : "2011-05-25T07:43"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["perl", "python"],
   "count" : 23,
   "price" : 53.7,
   "date" : "2011-05-24T03:24"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["perl", "ruby"],
   "count" : 14,
   "price" : 9.5,
   "date" : "2011-05-29T03:24"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["python", "ruby"],
   "count" : 14,
   "price" : 12.3,
   "date" : "2011-05-30T07:24"
 }'
 
-curl -XPOST localhost:9200/test/type1 -d '{
+curl localhost:9200/test/type1 -d '{
   "tags" : ["python", "scala"],
   "count" : 4,
   "price" : 3.3,

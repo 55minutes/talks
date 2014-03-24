@@ -10,7 +10,7 @@ curl -XPUT localhost:9200/index1 -d '{
 }'
 
 # index some data into *index1*
-curl -XPOST localhost:9200/index1/type1/1 -d '{
+curl localhost:9200/index1/type1/1 -d '{
   "message" : "I am a message that exists on index1"
 }'
 
@@ -23,7 +23,7 @@ curl -XPUT localhost:9200/index2 -d '{
 }'
 
 # index some data into *index2*
-curl -XPOST localhost:9200/index2/type1/1 -d '{
+curl localhost:9200/index2/type1/1 -d '{
   "message" : "I am a message that exists on index2"
 }'
 

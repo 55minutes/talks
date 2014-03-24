@@ -14,7 +14,7 @@ curl -XPUT localhost:9200/test/.percolator/elasticsearch?pretty=1 -d '{
 }'
 
 # now, percolate a document and find out which queries match it (note, doc not indexed)
-curl -XGET localhost:9200/test/type1/_percolate?pretty=1 -d '{
+curl localhost:9200/test/type1/_percolate?pretty=1 -d '{
   "doc" : {
     "message" : "this new elasticsearch percolator feature is nice, borat style"
   }
@@ -40,14 +40,14 @@ curl -XPUT localhost:9200/test/.percolator/kimchy?pretty=1 -d '{
 }'
 
 # and now, percolate a doc that matches both
-curl -XGET localhost:9200/test/type1/_percolate?pretty=1 -d '{
+curl localhost:9200/test/type1/_percolate?pretty=1 -d '{
   "doc" : {
     "message" : "this new elasticsearch percolator feature is nice, kimchy style"
   }
 }'
 
 # percolate the same doc, just add filtering on color to it
-curl -XGET localhost:9200/test/type1/_percolate?pretty=1 -d '{
+curl localhost:9200/test/type1/_percolate?pretty=1 -d '{
   "doc" : {
     "message" : "this new elasticsearch percolator feature is nice, kimchy style"
   },
@@ -62,13 +62,13 @@ curl -XGET localhost:9200/test/type1/_percolate?pretty=1 -d '{
 curl -XPUT 'localhost:9200/test/type1/1?pretty=1' -d '{
   "message" : "this new elasticsearch percolator feature is nice, kimchy style"
 }'
-curl -XGET 'localhost:9200/test/type1/1/_percolate?pretty=1'
+curl 'localhost:9200/test/type1/1/_percolate?pretty=1'
 
 # and, it can also be filtered
 curl -XPUT 'localhost:9200/test/type1/1?pretty=1' -d '{
   "message" : "this new elasticsearch percolator feature is nice, kimchy style"
 }'
-curl -XPOST 'localhost:9200/test/type1/1/_percolate?pretty=1' -d '{
+curl 'localhost:9200/test/type1/1/_percolate?pretty=1' -d '{
   "filter" : {
     "term" : {
       "color" : "blue"
