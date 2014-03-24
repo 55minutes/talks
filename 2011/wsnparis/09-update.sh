@@ -34,7 +34,7 @@ curl localhost:9200/test/type1/1?pretty=1
 # Bulk update
 curl localhost:9200/test/type1/_bulk --data-binary '
 { "update" : {"_id" : "2"} }
-{ "doc" : {"count" : 8} }
+{ "doc" : {"count" : 8, "price" : 12.92} }
 { "update" : {"_id" : "3"} }
 { "doc" : {"date" : "2011-06-01", "price" : 13.75} }
 '
