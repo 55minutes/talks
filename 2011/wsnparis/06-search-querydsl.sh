@@ -23,6 +23,10 @@ curl -XPUT localhost:9200/test/type1/3 -d '{
   "date" : "2011-05-27"
 }'
 
+# Use HEAD to determine if a document exists
+curl -I localhost:9200/test/type1/1
+curl -I localhost:9200/test/type1/4
+
 # Using Query String
 curl 'localhost:9200/test/_search?q=tags:scala&pretty=1'
 # Same as:
