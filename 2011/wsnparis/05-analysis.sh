@@ -16,7 +16,7 @@ curl 'localhost:9200/test/_analyze?analyzer=simple&pretty=1' -d 'The quick brown
 #    filter -> [lowercase, stop]
 curl 'localhost:9200/test/_analyze?analyzer=stop&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 # keyword analyzer:
-#   tokenizer -> keyword
+#    tokenizer -> keyword
 curl 'localhost:9200/test/_analyze?analyzer=keyword&pretty=1' -d 'The quick brown fox jumped over the lazy dog'
 
 curl -XDELETE localhost:9200/*
