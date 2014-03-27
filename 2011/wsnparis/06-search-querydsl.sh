@@ -27,6 +27,15 @@ curl -XPUT localhost:9200/test/type1/3 -d '{
 curl -I localhost:9200/test/type1/1
 curl -I localhost:9200/test/type1/4
 
+# Retrieve a single asset by id
+curl 'localhost:9200/test/type1/1?pretty=1'
+
+# Retrieve just the source
+curl 'localhost:9200/test/type1/1/_source?pretty=1'
+
+# Retrieve only specific fields from source
+curl 'localhost:9200/test/type1/1?_source=tags,date&pretty=1'
+
 # Using Query String
 curl 'localhost:9200/test/_search?q=tags:scala&pretty=1'
 # Same as:
