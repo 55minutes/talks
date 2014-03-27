@@ -103,12 +103,12 @@ curl -XPUT localhost:9200/test/type1/1 -d '{
   "text3" : "The quick brown fox jumped over the lazy dog"
 }'
 
-# search for quik (note that its not quick) using differen text3 fields
+# search for quik (note that its not quick) using different text3 fields
 curl 'localhost:9200/test/_search?q=text3:quik&pretty=1'
 curl 'localhost:9200/test/_search?q=text3.ngram:quik&pretty=1'
 curl 'localhost:9200/test/_search?q=text3.soundex:quik&pretty=1'
 
-# search for dawg (note that its not dog) using differen text3 fields
+# search for dawg (note that its not dog) using different text3 fields
 curl 'localhost:9200/test/_search?q=text3:dawg&pretty=1'
 curl 'localhost:9200/test/_search?q=text3.ngram:dawg&pretty=1'
 curl 'localhost:9200/test/_search?q=text3.soundex:dawg&pretty=1'
