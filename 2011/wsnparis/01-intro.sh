@@ -51,14 +51,14 @@ curl 'localhost:9200/_search?q=speaker:Adrian&pretty=1'
 curl 'localhost:9200/_search?q=_missing_:title&pretty=1'
 
 # What's the difference between index and create?
-curl localhost:9200/wsnparis/talk/ben -d '{
+curl -XPUT localhost:9200/wsnparis/talk/ben -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Harmonious Workplace"
 }'
 curl localhost:9200/wsnparis/talk/ben?pretty=1
 
 ## Now let's change it
-curl localhost:9200/wsnparis/talk/ben -d '{
+curl -XPUT localhost:9200/wsnparis/talk/ben -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Caring Workplace"
 }'
@@ -66,7 +66,7 @@ curl localhost:9200/wsnparis/talk/ben -d '{
 curl localhost:9200/wsnparis/talk/ben?pretty=1
 
 # Now let's try to use create, errors out
-curl localhost:9200/wsnparis/talk/ben/_create -d '{
+curl -XPUT localhost:9200/wsnparis/talk/ben/_create -d '{
   "speaker" : "Benjamin Pack",
   "title" : "Towards a Sarcastic Workplace"
 }'
